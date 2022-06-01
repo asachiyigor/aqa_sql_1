@@ -1,6 +1,7 @@
 package ru.netology.test;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.Data;
@@ -20,6 +21,11 @@ public class TestUI {
         Configuration.holdBrowserOpen = true;
         userInfo = Data.Registration.generateActiveUser();
         loginPage = open("http://localhost:9999", LoginPage.class);
+    }
+
+    @AfterAll
+    private static void clearDb() {
+        db.deleteDataFromDb();
     }
 
     @Test

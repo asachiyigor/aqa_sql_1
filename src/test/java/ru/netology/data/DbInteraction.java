@@ -40,4 +40,15 @@ public class DbInteraction {
             return runner.query(conn, codeSQL, new ScalarHandler<>(), user.getId());
         }
     }
+
+    @SneakyThrows
+    public void deleteDataFromDb() {
+        var runner = new QueryRunner();
+        try (var conn = getConnection()) {
+            runner.update(conn, "DELETE FROM card_transactions");
+            runner.update(conn, "DELETE FROM auth_codes");
+            runner.update(conn, "DELETE FROM cards");
+            runner.update(conn, "DELETE FROM users");
+        }
+    }
 }
